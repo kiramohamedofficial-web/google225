@@ -22,7 +22,7 @@ const InputField: React.FC<{ label: string, type: string, icon: React.ReactNode,
                 onChange={onChange}
                 placeholder={label}
                 required 
-                className="peer block w-full rounded-lg border border-slate-600 bg-black/20 focus:border-blue-500 focus:ring-blue-500 shadow-sm p-3 pr-10 transition text-white placeholder-transparent font-bold" 
+                className="peer block w-full rounded-lg border border-slate-600 bg-black/20 focus:border-blue-500 focus:ring-blue-500 shadow-sm p-3 pl-10 transition text-white placeholder-transparent font-bold" 
             />
             <label className="absolute right-3 -top-2.5 bg-slate-900 px-1 text-sm text-slate-300 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:font-normal peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-blue-400 peer-focus:font-bold font-bold">
                 {label}
@@ -312,7 +312,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-[#0a192f] text-slate-200 p-4 overflow-hidden dir-rtl">
+        <div className="min-h-screen flex items-center justify-center bg-[#0a192f] text-slate-200 p-4 overflow-hidden">
             <ParticleNetwork />
             <div className="relative z-10 w-full max-w-md animate-fade-in-up">
                 <div className="text-center mb-8">
