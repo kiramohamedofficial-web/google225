@@ -9,7 +9,7 @@ interface Card3DProps {
 const Card3D: React.FC<Card3DProps> = ({ children, className = '' }) => {
   return (
     <div
-      className={`relative rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:rotate-x-3 hover:rotate-y-2 ${className}`}
+      className={`relative rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:[transform:translateY(-0.5rem)_rotateX(5deg)_rotateY(3deg)] ${className}`}
       style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}
     >
       {children}
