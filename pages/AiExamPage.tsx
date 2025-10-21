@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { MOCK_SUBJECTS } from '../constants';
-import { Question, ExamResult, User } from '../types';
+import { Question, ExamResult, User, SubjectScore } from '../types';
 import { gradeExamWithNeoAI, generateExamQuestions } from '../services/geminiService';
 import Card3D from '../components/common/Card3D';
 
@@ -88,7 +88,7 @@ const AiExamPage: React.FC<AiExamPageProps> = ({ user }) => {
 
     const goToPrevious = () => {
         if (currentQuestionIndex > 0) {
-            setCurrentQuestionIndex(prev => prev - 1);
+            setCurrentQuestionIndex(prev => prev + 1);
         }
     };
     
@@ -149,17 +149,21 @@ const AiExamPage: React.FC<AiExamPageProps> = ({ user }) => {
                      <div className="bg-[hsl(var(--color-surface))] rounded-2xl shadow-lg p-6 border border-[hsl(var(--color-border))]">
                         <h3 className="text-2xl font-bold mb-4">تقرير المواد</h3>
                         <div className="space-y-3">
-                            {Object.entries(result.subjectScores).map(([subject, scores]) => (
+                            {Object.entries(result.subjectScores).map(([subject, scores]) => {
+                                // Fix: Cast scores to SubjectScore to access its properties safely.
+                                const subjectScore = scores as SubjectScore;
+                                return (
                                 <div key={subject} className="flex justify-between items-center bg-[hsl(var(--color-background))] p-3 rounded-lg">
                                     <span className="font-bold">{subject}</span>
                                     <div className="flex items-center gap-4">
                                         <div className="w-40 bg-black/10 dark:bg-white/10 rounded-full h-2.5">
-                                            <div className="bg-[hsl(var(--color-primary))] h-2.5 rounded-full" style={{ width: `${(scores.score / scores.total) * 100}%` }}></div>
+                                            <div className="bg-[hsl(var(--color-primary))] h-2.5 rounded-full" style={{ width: `${(subjectScore.score / subjectScore.total) * 100}%` }}></div>
                                         </div>
-                                        <span className="font-bold text-[hsl(var(--color-primary))] w-16 text-left">{scores.score} / {scores.total}</span>
+                                        <span className="font-bold text-[hsl(var(--color-primary))] w-16 text-left">{subjectScore.score} / {subjectScore.total}</span>
                                     </div>
                                 </div>
-                            ))}
+                                );
+                            })}
                         </div>
                     </div>
                 )}

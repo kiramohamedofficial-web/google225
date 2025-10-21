@@ -3,9 +3,6 @@ import { GoogleGenAI, Type } from '@google/genai';
 import { Question, ExamResult, SubjectScore } from '../types';
 import { MOCK_QUESTIONS } from '../constants';
 
-// The API key is handled securely by the environment.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
 interface Answer {
     questionId: string;
     answerIndex: number;
@@ -21,6 +18,10 @@ const shuffleArray = <T>(array: T[]): T[] => {
 };
 
 export const generateExamQuestions = async (subjects: string[], questionCount: number, gradeLevel: string): Promise<Question[]> => {
+    // The API key is handled securely by the environment.
+    // Initialize the client here to avoid top-level errors.
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+
     console.log("Generating exam questions with Gemini AI...");
 
     const questionSchema = {
